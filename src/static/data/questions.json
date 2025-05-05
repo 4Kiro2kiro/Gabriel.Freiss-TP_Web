@@ -1,0 +1,59 @@
+[
+  {
+    "label": "Quelle est la principale technologie utilisée pour structurer une page web?",
+    "qid": 1,
+    "reponses": [
+      {
+        "rid": 1,
+        "label": "HTML"
+      },
+      {
+        "rid": 2,
+        "label": "CSS"
+      },
+      {
+        "rid": 3,
+        "label": "JavaScript"
+      }
+    ],
+    "bonneReponse": 1
+  },
+  {
+    "label": "Quelle propriété CSS permet de créer un site responsive?",
+    "qid": 2,
+    "reponses": [
+      {
+        "rid": 1,
+        "label": "color"
+      },
+      {
+        "rid": 2,
+        "label": "media query"
+      },
+      {
+        "rid": 3,
+        "label": "font-size"
+      }
+    ],
+    "bonneReponse": 2
+  },
+  {
+    "label": "À quoi sert principalement JavaScript?",
+    "qid": 3,
+    "reponses": [
+      {
+        "rid": 1,
+        "label": "Structurer le contenu"
+      },
+      {
+        "rid": 2,
+        "label": "Styliser la page"
+      },
+      {
+        "rid": 3,
+        "label": "Ajouter de l'interactivité"
+      }
+    ],
+    "bonneReponse": 3
+  }
+]
