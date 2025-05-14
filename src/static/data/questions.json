@@ -1,57 +1,57 @@
 [
   {
-    "label": "Quelle est la principale technologie utilisée pour structurer une page web?",
+    "label": "Quel matériau est nécessaire pour fabriquer une pioche?",
     "qid": 1,
     "reponses": [
       {
         "rid": 1,
-        "label": "HTML"
+        "label": "Bâtons et planches"
       },
       {
         "rid": 2,
-        "label": "CSS"
+        "label": "Diamants uniquement"
       },
       {
         "rid": 3,
-        "label": "JavaScript"
+        "label": "Laine et ficelle"
       }
     ],
     "bonneReponse": 1
   },
   {
-    "label": "Quelle propriété CSS permet de créer un site responsive?",
+    "label": "Quelle créature explose quand elle s'approche des joueurs?",
     "qid": 2,
     "reponses": [
       {
         "rid": 1,
-        "label": "color"
+        "label": "Zombie"
       },
       {
         "rid": 2,
-        "label": "media query"
+        "label": "Creeper"
       },
       {
         "rid": 3,
-        "label": "font-size"
+        "label": "Enderman"
       }
     ],
     "bonneReponse": 2
   },
   {
-    "label": "À quoi sert principalement JavaScript?",
+    "label": "Quelle dimension contient le dragon de l'End?",
     "qid": 3,
     "reponses": [
       {
         "rid": 1,
-        "label": "Structurer le contenu"
+        "label": "Nether"
       },
       {
         "rid": 2,
-        "label": "Styliser la page"
+        "label": "Overworld"
       },
       {
         "rid": 3,
-        "label": "Ajouter de l'interactivité"
+        "label": "The End"
       }
     ],
     "bonneReponse": 3

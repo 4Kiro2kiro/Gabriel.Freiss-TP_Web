@@ -1,30 +1,30 @@
-// Constante contenant les questions et réponses
+// Constante contenant les questions et réponses sur Minecraft
 const questionnaire = [
   {
-    label: "Quelle est la principale technologie utilisée pour structurer une page web?",
+    label: "Quel matériau est nécessaire pour fabriquer une pioche?",
     qid: 1,
     reponses: [
-      { label: "HTML", rid: 1 },
-      { label: "CSS", rid: 2 },
-      { label: "JavaScript", rid: 3 }
+      { label: "Bâtons et planches", rid: 1 },
+      { label: "Diamants uniquement", rid: 2 },
+      { label: "Laine et ficelle", rid: 3 }
     ]
   },
   {
-    label: "Quelle propriété CSS permet de créer un site responsive?",
+    label: "Quelle créature explose quand elle s'approche des joueurs?",
     qid: 2,
     reponses: [
-      { label: "color", rid: 1 },
-      { label: "media query", rid: 2 },
-      { label: "font-size", rid: 3 }
+      { label: "Zombie", rid: 1 },
+      { label: "Creeper", rid: 2 },
+      { label: "Enderman", rid: 3 }
     ]
   },
   {
-    label: "À quoi sert principalement JavaScript?",
+    label: "Quelle dimension contient le dragon de l'End?",
     qid: 3,
     reponses: [
-      { label: "Structurer le contenu", rid: 1 },
-      { label: "Styliser la page", rid: 2 },
-      { label: "Ajouter de l'interactivité", rid: 3 }
+      { label: "Nether", rid: 1 },
+      { label: "Overworld", rid: 2 },
+      { label: "The End", rid: 3 }
     ]
   }
 ];
@@ -96,20 +96,48 @@ function initCalculator() {
   });
 }
 
-// Fonction pour charger le questionnaire
+// Fonction pour charger le questionnaire avec style Minecraft
 function loadQuestionnaire() {
   const questionContainer = document.getElementById('questionnaire');
   questionContainer.innerHTML = '';
   
   questionnaire.forEach(question => {
     const questionDiv = document.createElement('div');
-    questionDiv.className = 'mb-6 p-4 bg-base-200 rounded-lg';
+    questionDiv.className = 'mb-6 p-4 rounded-lg';
+    questionDiv.style.backgroundImage = "url('https://i.imgur.com/P7sDFp7.png')";
+    questionDiv.style.backgroundRepeat = "repeat";
+    questionDiv.style.border = "4px solid #5E3B1A";
+    questionDiv.style.imageRendering = "pixelated";
     
     // Titre de la question
     const questionTitle = document.createElement('h3');
     questionTitle.className = 'text-lg font-bold mb-3';
+    questionTitle.style.fontFamily = "'VT323', monospace";
+    questionTitle.style.color = "white";
+    questionTitle.style.fontSize = "1.5rem";
+    questionTitle.style.textShadow = "2px 2px #000";
     questionTitle.textContent = question.label;
     questionDiv.appendChild(questionTitle);
+    
+    // Image d'un item Minecraft avant la question
+    const itemImg = document.createElement('img');
+    itemImg.className = 'pixelated mb-2';
+    itemImg.style.width = '32px';
+    itemImg.style.height = '32px';
+    
+    // Différentes images pour différentes questions
+    if (question.qid === 1) {
+      itemImg.src = 'https://i.imgur.com/si7LQAl.png'; // Pickaxe
+      itemImg.alt = 'Pickaxe';
+    } else if (question.qid === 2) {
+      itemImg.src = 'https://i.imgur.com/NnFDfMK.png'; // Creeper
+      itemImg.alt = 'Creeper';
+    } else {
+      itemImg.src = 'https://i.imgur.com/IeGw0XQ.png'; // End portal
+      itemImg.alt = 'End portal';
+    }
+    
+    questionTitle.prepend(itemImg);
     
     // Réponses
     const reponsesList = document.createElement('div');
@@ -117,18 +145,26 @@ function loadQuestionnaire() {
     
     question.reponses.forEach(reponse => {
       const btn = document.createElement('button');
-      btn.className = 'btn btn-outline';
+      btn.className = 'minecraft-btn';
       btn.textContent = reponse.label;
       btn.setAttribute('data-qid', question.qid);
       btn.setAttribute('data-rid', reponse.rid);
       
       btn.addEventListener('click', function(event) {
+        // Son de clic Minecraft
+        const clickSound = new Audio('https://www.myinstants.com/media/sounds/minecraft-click.mp3');
+        clickSound.volume = 0.5;
+        clickSound.play();
+        
         // Désactive tous les boutons de cette question
         const questionBtns = reponsesList.querySelectorAll('button');
-        questionBtns.forEach(qBtn => qBtn.classList.remove('btn-primary'));
+        questionBtns.forEach(qBtn => {
+          qBtn.style.backgroundColor = '#727272';
+          qBtn.style.color = 'white';
+        });
         
         // Active ce bouton
-        btn.classList.add('btn-primary');
+        btn.style.backgroundColor = '#5D8C2D';
         
         // Enregistre la réponse
         reponses[question.qid] = reponse.rid;

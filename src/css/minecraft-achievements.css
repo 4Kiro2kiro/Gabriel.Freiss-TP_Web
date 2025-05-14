@@ -1,0 +1,45 @@
+/* Minecraft achievements styles */
+
+.achievement {
+  position: fixed;
+  bottom: -100px;
+  right: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid #444;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: #FFD700;
+  font-family: 'VT323', monospace;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 300px;
+  transition: bottom 0.5s;
+  opacity: 0;
+}
+
+.achievement.show {
+  bottom: 20px;
+  opacity: 1;
+}
+
+.achievement-icon {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+.achievement-content {
+  flex: 1;
+}
+
+.achievement-title {
+  font-size: 1.2rem;
+  margin-bottom: 3px;
+}
+
+.achievement-desc {
+  color: white;
+  font-size: 0.9rem;
+}
