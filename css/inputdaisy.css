@@ -1,0 +1,1197 @@
+/* Minecraft Theme for Steve's CV */
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../static/fonts/Minecraft.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --minecraft-dirt: #8B5E34;
+    --minecraft-grass: #56941D;
+    --minecraft-stone: #828282;
+    --minecraft-wood: #9B6E3D;
+    --minecraft-obsidian: #1B1B1B;
+    --minecraft-diamond: #4AEDD9;
+    --minecraft-gold: #FFD700;
+    --minecraft-emerald: #00C467;
+    --minecraft-redstone: #FF0000;
+    --minecraft-oak: #9E7E5E;
+    --minecraft-text-yellow: #FFAA00;
+    --minecraft-text-green: #00AA00;
+    --minecraft-text-blue: #5555FF;
+}
+
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Minecraft', 'VT323', monospace;
+    margin: 0;
+    background-color: var(--minecraft-stone);
+    color: white;
+    line-height: 1.6;
+    overflow: hidden; /* Prevent standard scrolling */
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+/* Section transitions style Apple/Minecraft */
+.minecraft-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    padding: 5rem 2rem 2rem;
+    z-index: 1;
+    backface-visibility: hidden; /* Optimisation pour l'animation */
+    will-change: transform, opacity; /* Optimisation pour l'animation */
+}
+
+.minecraft-section-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100vh);
+    z-index: 0;
+    visibility: hidden; /* S'assurer que la section est bien cachée */
+}
+
+.minecraft-section-active {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    z-index: 10 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.minecraft-section-entering {
+    animation: none; /* Désactiver l'animation problématique */
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    z-index: 5 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.minecraft-section-entering::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../static/textures/stone.png');
+    background-size: 64px;
+    background-repeat: repeat;
+    opacity: 0.3;
+    pointer-events: none;
+    animation: none; /* Désactiver l'animation problématique */
+}
+
+.minecraft-section-exiting {
+    animation: none; /* Désactiver l'animation problématique */
+    opacity: 0 !important;
+    z-index: 1;
+    visibility: hidden !important;
+}
+
+@keyframes section-enter {
+    0% {
+        opacity: 0;
+        transform: translateY(100vh);
+    }
+    60% {
+        opacity: 0.9;
+        transform: translateY(-2vh);
+    }
+    80% {
+        opacity: 1;
+        transform: translateY(1vh);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes section-exit {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    30% {
+        opacity: 0.9;
+        transform: translateY(-1vh);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
+}
+
+/* Indicateurs de section */
+.section-indicators {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 100;
+}
+
+.section-indicator {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid #222;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section-indicator:hover {
+    transform: scale(1.1);
+    background-color: rgba(30, 30, 30, 0.8);
+    border-color: var(--minecraft-gold);
+}
+
+.section-indicator.active {
+    background-color: rgba(60, 60, 60, 0.9);
+    border-color: var(--minecraft-text-yellow);
+    transform: scale(1.15);
+}
+
+.section-indicator.active::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 6px solid var(--minecraft-text-yellow);
+}
+
+.indicator-icon {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+.icon-home {
+    background-image: url('../static/icons/diamond.png');
+}
+
+.icon-steve {
+    background-image: url('../static/icons/diamond_sword.png');
+}
+
+.icon-sword {
+    background-image: url('../static/icons/diamond_pickaxe.png');
+}
+
+.icon-craft {
+    background-image: url('../static/icons/iron_ingot.png');
+}
+
+.icon-book {
+    background-image: url('../static/icons/diamond.png');
+}
+
+.icon-block {
+    background-image: url('../static/icons/diamond.png');
+}
+
+/* Particules de transition */
+.transition-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 90;
+}
+
+.transition-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--minecraft-dirt);
+    animation: transition-particle 1.5s ease-out forwards;
+    transform-origin: center;
+}
+
+@keyframes transition-particle {
+    0% {
+        transform: scale(0) rotate(0);
+        opacity: 0;
+    }
+    20% {
+        transform: scale(1.5) rotate(45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+/* Minecraft Block Texture */
+.block-texture {
+    image-rendering: pixelated;
+    background-size: 64px;
+    background-repeat: repeat;
+}
+
+.dirt-texture {
+    background-color: var(--minecraft-dirt);
+    background-image: url('../static/textures/dirt.png');
+}
+
+.stone-texture {
+    background-color: var(--minecraft-stone);
+    background-image: url('../static/textures/stone.png');
+}
+
+.grass-texture {
+    background-color: var(--minecraft-grass);
+    background-image: url('../static/textures/grass_block_top.png');
+}
+
+.nether-texture {
+    background-color: #5C1919;
+    background-image: url('../static/textures/netherrack.png');
+}
+
+.end-texture {
+    background-color: #F7F3D8;
+    background-image: url('../static/textures/end_stone.png');
+}
+
+/* Navigation Menu */
+.minecraft-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 4px solid #000;
+}
+
+.minecraft-navbar .brand {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    color: var(--minecraft-text-yellow);
+    text-shadow: 2px 2px #000;
+}
+
+.minecraft-navbar .nav-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.minecraft-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--minecraft-stone);
+    border: 3px solid #000;
+    color: var(--minecraft-text-yellow);
+    font-family: 'Minecraft', 'VT323', monospace;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.minecraft-btn:hover {
+    transform: scale(1.05);
+    background-color: var(--minecraft-obsidian);
+}
+
+/* Minecraft Sections */
+.section-title {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: var(--minecraft-text-yellow);
+    text-shadow: 3px 3px #000;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    background-size: 128px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/dirt.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.2;
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 10;
+    text-align: center;
+}
+
+.hero-title {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--minecraft-text-yellow);
+    text-shadow: 4px 4px #000;
+}
+
+.hero-subtitle {
+    font-family: 'Minecraft', 'VT323', monospace;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--minecraft-text-green);
+}
+
+/* About Section */
+.about-section {
+    position: relative;
+}
+
+.about-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/stone.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.2;
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.steve-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    position: relative;
+    perspective: 800px;
+    overflow: visible;
+}
+
+.steve-image {
+    display: block;
+    max-width: 300px;
+    image-rendering: pixelated;
+    position: relative;
+    z-index: 5;
+    transition: opacity 1s;
+}
+
+.steve-image::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1) 0px,
+        rgba(0, 0, 0, 0.1) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.steve-image:hover::before {
+    opacity: 1;
+}
+
+.steve-image.steve-appeared {
+    opacity: 1;
+    animation: steveEntrance 1.5s ease-out forwards, minecraft-float 2s infinite ease-in-out alternate;
+    filter: drop-shadow(0 0 10px var(--minecraft-text-yellow));
+}
+
+@keyframes steveEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.5) rotateY(180deg);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(0) scale(1.2) rotateY(0);
+    }
+    75% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes minecraft-float {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+    100% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+/* Skills Section */
+.skills-section {
+    position: relative;
+}
+
+.skills-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/end_stone.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.2;
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.skill-item {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 3px solid #000;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.skill-name {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--minecraft-text-yellow);
+}
+
+.skill-bar {
+    height: 30px;
+    background-color: #444;
+    border: 2px solid #000;
+    position: relative;
+}
+
+.skill-progress {
+    height: 100%;
+    background-color: var(--minecraft-emerald);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+    );
+    animation: shine 1.5s infinite linear;
+    transform: translateX(-100%);
+}
+
+@keyframes shine {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Minecraft Calculator Section */
+.crafting-section {
+    position: relative;
+}
+
+.crafting-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/netherrack.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.2;
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.crafting-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: var(--minecraft-wood);
+    border: 4px solid #000;
+    padding: 1.5rem;
+    position: relative;
+    border-radius: 8px;
+}
+
+.crafting-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/crafting_table_top.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.7;
+    z-index: 0;
+    border-radius: 4px;
+    image-rendering: pixelated;
+}
+
+.craft-display-container {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 1.5rem;
+}
+
+.craft-display {
+    width: 100%;
+    padding: 1rem;
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    text-align: right;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: var(--minecraft-emerald);
+    border: 3px solid #000;
+}
+
+.crafting-subtitle {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--minecraft-text-yellow);
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px #000;
+}
+
+/* Nouveau style de grille de craft */
+.crafting-grid-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.crafting-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 8px;
+    border: 3px solid #000;
+    max-width: 240px;
+}
+
+.crafting-grid-row {
+    display: contents;
+}
+
+.crafting-grid-cell {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(60, 60, 60, 0.6);
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.crafting-grid-cell:hover {
+    background-color: rgba(100, 100, 100, 0.7);
+    transform: scale(1.05);
+}
+
+.crafting-grid-cell.cell-active {
+    animation: cell-click 0.3s ease-out;
+}
+
+@keyframes cell-click {
+    0% {
+        transform: scale(1);
+        background-color: rgba(60, 60, 60, 0.6);
+    }
+    50% {
+        transform: scale(0.9);
+        background-color: rgba(166, 166, 166, 0.9);
+    }
+    100% {
+        transform: scale(1);
+        background-color: rgba(60, 60, 60, 0.6);
+    }
+}
+
+.crafting-item-img {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.crafting-arrow {
+    font-size: 2rem;
+    animation: arrow-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes arrow-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+.crafting-result {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 3px solid #000;
+    padding: 8px;
+}
+
+.result-cell {
+    background-color: rgba(40, 100, 40, 0.6);
+}
+
+.result-cell:hover {
+    background-color: rgba(60, 140, 60, 0.7);
+}
+
+.operations-grid {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 3px solid #000;
+    padding: 8px;
+    margin-top: 1rem;
+}
+
+.operations-title {
+    font-family: 'Minecraft', 'VT323', monospace;
+    font-size: 1rem;
+    color: var(--minecraft-text-yellow);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.operations-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.operation-cell {
+    position: relative;
+    width: 56px;
+    height: 56px;
+}
+
+.operation-label {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--minecraft-text-yellow);
+    padding: 2px 5px;
+    font-size: 0.9rem;
+    border: 1px solid #000;
+}
+
+.clear-cell {
+    background-color: rgba(120, 40, 40, 0.6);
+}
+
+.clear-cell:hover {
+    background-color: rgba(160, 60, 60, 0.7);
+}
+
+.crafting-instructions {
+    font-family: 'Minecraft', 'VT323', monospace;
+    color: white;
+    font-size: 0.9rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 8px;
+    border: 2px solid #000;
+    margin-top: 1rem;
+}
+
+/* Contact Section */
+.contact-section {
+    position: relative;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../static/textures/grass_block_top.png');
+    background-repeat: repeat;
+    background-size: 64px;
+    opacity: 0.2;
+    z-index: -1;
+    image-rendering: pixelated;
+}
+
+.questionnaire-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 4px solid #000;
+    padding: 1rem;
+}
+
+.question {
+    margin-bottom: 2rem;
+}
+
+.question-text {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: var(--minecraft-text-yellow);
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.option-btn {
+    text-align: left;
+}
+
+.option-btn.correct {
+    background-color: var(--minecraft-emerald);
+    color: #000;
+}
+
+.option-btn.incorrect {
+    background-color: var(--minecraft-redstone);
+}
+
+/* Bruteforce Button */
+.bruteforce-btn {
+    background-color: var(--minecraft-redstone);
+    color: white;
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1rem;
+    padding: 1rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Minecraft Card */
+.minecraft-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 4px solid #000;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card-title {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--minecraft-text-yellow);
+}
+
+/* Achievements System */
+.achievements-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.achievement {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--minecraft-gold);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.achievement.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.achievement-icon {
+    width: 32px;
+    height: 32px;
+    image-rendering: pixelated;
+}
+
+.achievement-text {
+    flex: 1;
+}
+
+.achievement-title {
+    font-family: 'Minecraft', 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--minecraft-text-yellow);
+}
+
+.achievement-description {
+    font-size: 0.9rem;
+    color: white;
+}
+
+/* Fade-In Animation */
+.fade-in {
+    opacity: 0; /* Démarrer invisible pour l'animation */
+    transform: translateY(20px); /* Position de départ pour l'animation */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Animation d'entrée */
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Minecraft-style typing animation for text */
+.minecraft-typing {
+    overflow: hidden;
+    border-right: 0.15em solid var(--minecraft-gold);
+    white-space: nowrap;
+    display: inline-block;
+    letter-spacing: 0.15em;
+    width: 0;
+    animation: 
+        typing 3.5s steps(40, end) forwards,
+        blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--minecraft-gold) }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .minecraft-navbar {
+        flex-direction: column;
+    }
+    
+    .minecraft-navbar .nav-links {
+        margin-top: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .minecraft-typing {
+        white-space: normal;
+        border-right: none;
+        animation: fadeIn 1s ease-in;
+        width: 100%;
+    }
+    
+    .calc-btn {
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .btn-icon {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .crafting-item {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Minecraft Particles */
+.minecraft-particle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #8B5E34;
+    image-rendering: pixelated;
+    z-index: 10;
+    animation: particle-float 1.5s ease-out forwards;
+}
+
+@keyframes particle-float {
+    0% {
+        transform: translate(0, 0) rotate(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, -50px), var(--y, -150px)) rotate(var(--rot, 45deg));
+        opacity: 0;
+    }
+}
+
+/* Minecraft Loading Animation */
+.minecraft-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    transition: opacity 0.5s;
+}
+
+.minecraft-loading-overlay.fade-out {
+    opacity: 0;
+}
+
+.minecraft-loading-bar {
+    width: 80%;
+    height: 20px;
+    background-color: #444;
+    border: 2px solid #000;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.minecraft-loading-progress {
+    height: 100%;
+    width: 0;
+    background-color: var(--minecraft-emerald);
+    transition: width 0.2s linear;
+}
+
+.minecraft-loading-text {
+    font-family: 'Minecraft', 'VT323', monospace;
+    color: var(--minecraft-text-yellow);
+    font-size: 1.2rem;
+    text-shadow: 2px 2px #000;
+}
+
+/* Effet de téléportation */
+.teleporting {
+    animation: teleport-fade 0.5s ease-in-out;
+}
+
+@keyframes teleport-fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Particules de téléportation */
+.teleport-particles {
+    pointer-events: none;
+}
+
+.teleport-particle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    background-color: #8B5E34;
+    transform-origin: center;
+    animation: teleport-particle 2s ease-out forwards;
+}
+
+@keyframes teleport-particle {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(calc(var(--distance) * 0.2)) 
+                   translateY(calc(var(--distanceY) * 0.2))
+                   rotate(var(--angle))
+                   scale(1);
+    }
+    100% {
+        transform: translateX(var(--distance))
+                   translateY(var(--distanceY))
+                   rotate(calc(var(--angle) * 2))
+                   scale(0);
+        opacity: 0;
+    }
+}
+
+/* Blocs d'arrière-plan */
+.background-blocks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -5;
+    overflow: hidden;
+}
+
+.background-block {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    opacity: 0.1;
+    image-rendering: pixelated;
+    transform: rotate(0);
+    transition: transform 0.5s ease-out;
+}
+
+.background-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+}
+
+.dirt-block::before {
+    background-image: url('../static/textures/dirt.png');
+}
+
+.stone-block::before {
+    background-image: url('../static/textures/stone.png');
+}
+
+.grass-block::before {
+    background-image: url('../static/textures/grass_block_top.png');
+}
+
+.diamond-block::before {
+    background-color: var(--minecraft-diamond);
+}
+
+/* Animation de tremblement Minecraft */
+.minecraft-shake {
+    animation: minecraft-shake 0.8s ease;
+}
+
+@keyframes minecraft-shake {
+    0% { transform: translate(0, 0) rotate(0); }
+    10% { transform: translate(-6px, 0) rotate(-3deg); }
+    20% { transform: translate(5px, 0) rotate(2deg); }
+    30% { transform: translate(-4px, 0) rotate(-2deg); }
+    40% { transform: translate(4px, 0) rotate(1deg); }
+    50% { transform: translate(-2px, 0) rotate(-1deg); }
+    60% { transform: translate(2px, 0) rotate(0.5deg); }
+    70% { transform: translate(-1px, 0) rotate(-0.3deg); }
+    80% { transform: translate(1px, 0) rotate(0.2deg); }
+    90% { transform: translate(0.5px, 0) rotate(-0.1deg); }
+    100% { transform: translate(0, 0) rotate(0); }
+} 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve's CV - Minecraft Edition</title>
+    <link rel="stylesheet" href="css/inputdaisy.css">
+    <link rel="icon" href="static/steve.png" type="image/png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="minecraft-navbar">
+        <div class="brand">Steve's CV</div>
+        <div class="nav-links">
+            <a href="#hero" class="minecraft-btn">Accueil</a>
+            <a href="#about" class="minecraft-btn">À propos</a>
+            <a href="#skills" class="minecraft-btn">Compétences</a>
+            <a href="#crafting" class="minecraft-btn">Crafting</a>
+            <a href="#contact" class="minecraft-btn">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="minecraft-section hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="minecraft-typing">Steve</span>
+            </h1>
+            <h2 class="hero-subtitle">
+                <span class="minecraft-typing" style="animation-delay: 1s;">Explorateur professionnel & Constructeur créatif</span>
+            </h2>
+            <div style="opacity: 0; animation: fadeIn 1s ease-in forwards 2s;">
+                <a href="#about" class="minecraft-btn">Explorer mon CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="minecraft-section about-section">
+        <h2 class="section-title fade-in">À propos de moi</h2>
+        <div class="about-grid">
+            <div class="minecraft-card fade-in">
+                <h3 class="card-title">Mon histoire</h3>
+                <p>Je suis Steve, explorateur passionné avec plus de 10 ans d'expérience dans la survie et la construction en environnements hostiles. Expert en gestion de ressources et en création de structures innovantes.</p>
+                <p>Né dans un monde cubique, j'ai développé des compétences uniques pour prospérer dans n'importe quel biome. Ma capacité à collecter des ressources et à construire des abris efficaces m'a permis de surmonter d'innombrables défis.</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-label">Blocs minés</div>
+                        <div class="stat-value">1M+</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Structures construites</div>
+                        <div class="stat-value">500+</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Monstres vaincus</div>
+                        <div class="stat-value">10K+</div>
+                    </div>
+                </div>
+            </div>
+            <div class="steve-container fade-in">
+                <img src="static/steve.png" alt="Steve Minecraft" class="steve-image" style="image-rendering: pixelated;">
+                <div class="minecraft-card">
+                    <h3 class="card-title">Informations</h3>
+                    <ul class="info-list">
+                        <li><strong>Nom:</strong> Steve</li>
+                        <li><strong>Occupation:</strong> Mineur / Constructeur</li>
+                        <li><strong>Localisation:</strong> Overworld</li>
+                        <li><strong>Expérience:</strong> 10+ ans</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="minecraft-section skills-section">
+        <h2 class="section-title fade-in">Mes compétences</h2>
+        <div class="skills-container fade-in">
+            <div class="minecraft-card">
+                <div class="skill-item">
+                    <div class="skill-name">Minage</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Construction</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Combat</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Agriculture</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Exploration</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">Artisanat</div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crafting Table Section -->
+    <section id="crafting" class="minecraft-section crafting-section">
+        <h2 class="section-title fade-in">Table de Craft</h2>
+        <div class="minecraft-card fade-in">
+            <h3 class="card-title">Créez votre calculatrice</h3>
+            <p>Utilisez la table de craft pour créer différentes opérations mathématiques. Cliquez sur les cases pour activer/désactiver les ingrédients et découvrez les différentes recettes.</p>
+            <p>Une fois que vous avez créé des symboles, vous pouvez les utiliser pour calculer des expressions.</p>
+        </div>
+        <div class="crafting-container fade-in">
+            <!-- La table de craft sera générée via JavaScript -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="minecraft-section contact-section">
+        <h2 class="section-title fade-in">Me contacter</h2>
+        <div class="questionnaire-container fade-in">
+            <div class="minecraft-card">
+                <h3 class="card-title">Questionnaire Minecraft</h3>
+                <p>Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
+                <div id="questionnaire">
+                    <!-- Le questionnaire sera généré via JavaScript -->
+                </div>
+                <button id="bruteforce-btn" class="minecraft-btn bruteforce-btn">Bruteforce</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+</body>
+</html> 
