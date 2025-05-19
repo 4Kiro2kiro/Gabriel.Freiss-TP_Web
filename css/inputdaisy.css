@@ -524,12 +524,12 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('../static/textures/end_stone.png');
-    background-repeat: repeat;
-    background-size: 64px;
-    opacity: 0.2;
+    background-image: url('../static/enter_cave.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
     z-index: -1;
-    image-rendering: pixelated;
 }
 
 .skill-item {
@@ -592,12 +592,12 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('../static/textures/netherrack.png');
-    background-repeat: repeat;
-    background-size: 64px;
-    opacity: 0.2;
+    background-image: url('../static/cave.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
     z-index: -1;
-    image-rendering: pixelated;
 }
 
 .crafting-container {
@@ -819,12 +819,12 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('../static/textures/grass_block_top.png');
-    background-repeat: repeat;
-    background-size: 64px;
-    opacity: 0.2;
+    background-image: url('../static/end.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;
     z-index: -1;
-    image-rendering: pixelated;
 }
 
 .questionnaire-container {
