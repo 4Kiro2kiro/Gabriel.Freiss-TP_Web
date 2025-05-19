@@ -49,7 +49,9 @@ body {
     position: relative;
     width: 100%;
     min-height: 100vh;
-    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5rem 2rem 2rem;
     z-index: 1;
 }
@@ -378,15 +380,20 @@ body {
     animation: fadeIn 0.5s ease-in forwards 0.5s;
 }
 
+.hero-steve-image {
+    width: 300px;
+    height: auto;
+    animation: float 3s ease-in-out infinite 1s;
+}
+
 .hero-text-container {
     opacity: 0;
     animation: fadeIn 0.5s ease-in forwards 1s;
 }
 
-.hero-steve-image {
-    width: 300px;
-    height: auto;
-    animation: float 3s ease-in-out infinite 1s;
+.hero-cta {
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in forwards 2s;
 }
 
 @keyframes float {
@@ -413,11 +420,6 @@ body {
     color: white;
 }
 
-.hero-cta {
-    opacity: 0;
-    animation: fadeIn 0.5s ease-in forwards 2s;
-}
-
 /* About Section */
 .about-section {
     position: relative;
@@ -439,26 +441,22 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .steve-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    height: 300px;
-    position: relative;
-    perspective: 800px;
-    overflow: visible;
+    gap: 2rem;
 }
 
 .steve-image {
-    display: block;
-    max-width: 300px;
+    width: 350px;
+    height: auto;
     image-rendering: pixelated;
-    position: relative;
-    z-index: 5;
-    transition: opacity 1s;
 }
 
 .steve-image::before {
@@ -532,11 +530,17 @@ body {
     z-index: -1;
 }
 
+.skills-container {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+}
+
 .skill-item {
     background-color: rgba(0, 0, 0, 0.7);
     border: 3px solid #000;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .skill-name {
@@ -601,13 +605,12 @@ body {
 }
 
 .crafting-container {
-    max-width: 500px;
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     background-color: var(--minecraft-wood);
     border: 4px solid #000;
-    padding: 1.5rem;
-    position: relative;
-    border-radius: 8px;
+    padding: 2rem;
 }
 
 .crafting-container::before {
@@ -828,11 +831,12 @@ body {
 }
 
 .questionnaire-container {
-    max-width: 600px;
+    max-width: 800px;
+    width: 100%;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.8);
     border: 4px solid #000;
-    padding: 1rem;
+    padding: 2rem;
 }
 
 .question {
@@ -1069,6 +1073,18 @@ body {
         animation: none;
         width: 100%;
         border-right: none;
+    }
+    
+    .hero-steve-image {
+        width: 300px;
+    }
+    
+    .steve-image {
+        width: 250px;
+    }
+    
+    .minecraft-section {
+        padding: 4rem 1rem 1rem;
     }
 }
 
