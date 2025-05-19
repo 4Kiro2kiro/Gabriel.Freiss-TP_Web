@@ -998,11 +998,11 @@ body {
 }
 
 .hero-title .minecraft-text {
-    animation: textReveal 2s steps(10, end) forwards;
+    animation: textReveal 8s steps(40, end) forwards 1s;
 }
 
 .hero-subtitle .minecraft-text {
-    animation: textReveal 2s steps(40, end) forwards 1s;
+    animation: textReveal 5s steps(40, end) forwards 1ms;
 }
 
 @keyframes textReveal {
