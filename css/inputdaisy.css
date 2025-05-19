@@ -352,6 +352,7 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding-top: 80px;
 }
 
 .hero-section::before {
@@ -372,6 +373,7 @@ body {
     padding: 2rem;
     opacity: 0;
     animation: fadeIn 0.5s ease-in forwards;
+    margin-top: 40px;
 }
 
 .hero-image-container {
@@ -423,6 +425,11 @@ body {
 /* About Section */
 .about-section {
     position: relative;
+    min-height: 100vh;
+    padding: 100px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .about-section::before {
@@ -443,7 +450,7 @@ body {
     gap: 2rem;
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto;
+    margin: 40px auto 0;
 }
 
 .steve-container {
@@ -516,6 +523,11 @@ body {
 /* Skills Section */
 .skills-section {
     position: relative;
+    min-height: 100vh;
+    padding: 100px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .skills-section::before {
@@ -531,7 +543,7 @@ body {
 }
 
 .skills-container {
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     margin: 0 auto;
 }
@@ -539,19 +551,23 @@ body {
 .skill-item {
     background-color: rgba(0, 0, 0, 0.7);
     border: 3px solid #000;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 1.2rem;
+    margin-bottom: 1.2rem;
+}
+
+.skill-item:last-child {
+    margin-bottom: 0;
 }
 
 .skill-name {
     font-family: 'Minecraft', 'Press Start 2P', cursive;
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
     color: white;
 }
 
 .skill-bar {
-    height: 30px;
+    height: 25px;
     background-color: #444;
     border: 2px solid #000;
     position: relative;
