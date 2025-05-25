@@ -985,129 +985,211 @@ function updateCalculatorDisplay() {
     }
 }
 
-// Questionnaire
+// Questionnaire Minecraft
 const questionnaire = [
     {
         qid: 1,
-        question: "Quel bloc est le plus résistant dans Minecraft ?",
-        options: [
-            { id: 1, text: "Obsidienne" },
-            { id: 2, text: "Diamant" },
-            { id: 3, text: "Bedrock" }
-        ],
-        correctAnswer: 3
+        label: "Quel bloc est le plus résistant dans Minecraft ?",
+        reponses: [
+            { rid: 1, label: "Obsidienne" },
+            { rid: 2, label: "Diamant" },
+            { rid: 3, label: "Bedrock" }
+        ]
     },
     {
         qid: 2,
-        question: "Quelle est la meilleure méthode de minage ?",
-        options: [
-            { id: 1, text: "Strip Mining" },
-            { id: 2, text: "Branch Mining" },
-            { id: 3, text: "Cave Mining" }
-        ],
-        correctAnswer: 2
+        label: "Quelle est la meilleure méthode de minage ?",
+        reponses: [
+            { rid: 1, label: "Strip Mining" },
+            { rid: 2, label: "Branch Mining" },
+            { rid: 3, label: "Cave Mining" }
+        ]
     },
     {
         qid: 3,
-        question: "Quel est le meilleur outil pour miner l'obsidienne ?",
-        options: [
-            { id: 1, text: "Pioche en fer" },
-            { id: 2, text: "Pioche en diamant" },
-            { id: 3, text: "Pioche en netherite" }
-        ],
-        correctAnswer: 3
+        label: "Quel est le meilleur outil pour miner l'obsidienne ?",
+        reponses: [
+            { rid: 1, label: "Pioche en fer" },
+            { rid: 2, label: "Pioche en diamant" },
+            { rid: 3, label: "Pioche en netherite" }
+        ]
     }
 ];
 
-// Configuration du questionnaire
-function setupQuestionnaire() {
-    const questionnaireContainer = document.getElementById('questionnaire');
-    if (!questionnaireContainer) return;
+// Réponses correctes
+const bonnesReponses = {
+    1: 3, // Bedrock
+    2: 2, // Branch Mining
+    3: 3  // Pioche en netherite
+};
+
+let reponses = {};
+
+// Fonction pour créer le questionnaire
+function creerQuestionnaire() {
+    const container = document.getElementById('questionnaire');
+    if (!container) return;
     
-    // Créer les questions
-    questionnaire.forEach(q => {
-        const questionElement = document.createElement('div');
-        questionElement.className = 'question';
-        questionElement.innerHTML = `
-            <div class="question-text">${q.question}</div>
-            <div class="options" id="options-${q.qid}">
-                ${q.options.map(option => `
+    questionnaire.forEach(question => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'mb-4';
+        questionDiv.innerHTML = `
+            <h3 class="text-xl mb-2">${question.label}</h3>
+            <div class="flex flex-col gap-2">
+                ${question.reponses.map(reponse => `
                     <button 
-                        class="minecraft-btn option-btn" 
-                        data-qid="${q.qid}" 
-                        data-option-id="${option.id}"
-                        onclick="selectAnswer(${q.qid}, ${option.id})"
+                        class="btn btn-outline" 
+                        onclick="repondre(${question.qid}, ${reponse.rid})"
+                        data-qid="${question.qid}"
+                        data-rid="${reponse.rid}"
                     >
-                        ${option.text}
+                        ${reponse.label}
                     </button>
                 `).join('')}
             </div>
         `;
-        questionnaireContainer.appendChild(questionElement);
+        container.appendChild(questionDiv);
     });
 }
 
-// Réponses de l'utilisateur
-let userAnswers = {};
-
-// Sélection d'une réponse
-window.selectAnswer = function(questionId, optionId) {
-    userAnswers[questionId] = optionId;
+// Fonction pour gérer les réponses
+function repondre(qid, rid) {
+    reponses[qid] = rid;
     
     // Mettre à jour le style des boutons
-    const options = document.querySelectorAll(`button[data-qid="${questionId}"]`);
-    options.forEach(button => {
-        button.classList.remove('correct', 'incorrect');
-        
-        const buttonOptionId = parseInt(button.getAttribute('data-option-id'));
-        if (buttonOptionId === optionId) {
-            const question = questionnaire.find(q => q.qid === questionId);
-            if (question && buttonOptionId === question.correctAnswer) {
-                button.classList.add('correct');
-                unlockAchievement('correct_answer', 'Bonne réponse!', '../static/icons/diamond.png');
-                playSuccessSound();
-            } else {
-                button.classList.add('incorrect');
-                playErrorSound();
-            }
+    document.querySelectorAll(`button[data-qid="${qid}"]`).forEach(btn => {
+        btn.classList.remove('btn-success', 'btn-error');
+        if (parseInt(btn.dataset.rid) === rid) {
+            btn.classList.add(rid === bonnesReponses[qid] ? 'btn-success' : 'btn-error');
         }
     });
-    
-    // Vérifier si toutes les réponses sont correctes
-    checkAllAnswers();
-};
 
-// Vérifier toutes les réponses
-function checkAllAnswers() {
-    // Vérifier si toutes les questions ont été répondues
-    if (Object.keys(userAnswers).length !== questionnaire.length) return;
-    
-    // Vérifier si toutes les réponses sont correctes
-    const allCorrect = questionnaire.every(q => userAnswers[q.qid] === q.correctAnswer);
-    
-    if (allCorrect) {
-        unlockAchievement('all_answers', 'Toutes les réponses sont correctes!', '../static/icons/diamond_sword.png');
-        // Rediriger vers la page de contact
-        setTimeout(() => {
+    // Vérifier si toutes les questions sont répondues
+    if (Object.keys(reponses).length === Object.keys(bonnesReponses).length) {
+        // Vérifier si toutes les réponses sont correctes
+        const toutesLesReponsesSontCorrectes = Object.entries(reponses).every(
+            ([qid, rid]) => rid === bonnesReponses[qid]
+        );
+
+        if (toutesLesReponsesSontCorrectes) {
             window.location.href = 'pagecontact.html';
-        }, 1500);
+        }
     }
 }
 
-// Bouton Bruteforce
+// Calculatrice Minecraft
+function creerCalculatrice() {
+    const container = document.querySelector('.crafting-container');
+    if (!container) return;
+    
+    container.innerHTML = `
+        <div class="col-span-3 mb-4">
+            <input type="text" class="input input-bordered w-full" id="calc-display" readonly>
+        </div>
+        <button class="btn btn-primary" onclick="appendNumber('7')">7</button>
+        <button class="btn btn-primary" onclick="appendNumber('8')">8</button>
+        <button class="btn btn-primary" onclick="appendNumber('9')">9</button>
+        <button class="btn btn-secondary" onclick="appendOperator('+')">+</button>
+        <button class="btn btn-primary" onclick="appendNumber('4')">4</button>
+        <button class="btn btn-primary" onclick="appendNumber('5')">5</button>
+        <button class="btn btn-primary" onclick="appendNumber('6')">6</button>
+        <button class="btn btn-secondary" onclick="appendOperator('-')">-</button>
+        <button class="btn btn-primary" onclick="appendNumber('1')">1</button>
+        <button class="btn btn-primary" onclick="appendNumber('2')">2</button>
+        <button class="btn btn-primary" onclick="appendNumber('3')">3</button>
+        <button class="btn btn-secondary" onclick="appendOperator('*')">×</button>
+        <button class="btn btn-accent" onclick="clearDisplay()">C</button>
+        <button class="btn btn-primary" onclick="appendNumber('0')">0</button>
+        <button class="btn btn-success" onclick="calculate()">=</button>
+        <button class="btn btn-secondary" onclick="appendOperator('/')">/</button>
+    `;
+}
+
+let displayValue = '';
+
+function appendNumber(num) {
+    displayValue += num;
+    updateDisplay();
+}
+
+function appendOperator(op) {
+    displayValue += ` ${op} `;
+    updateDisplay();
+}
+
+function clearDisplay() {
+    displayValue = '';
+    updateDisplay();
+}
+
+function calculate() {
+    try {
+        // Évaluer l'expression
+        displayValue = eval(displayValue).toString();
+    } catch (e) {
+        displayValue = 'Error';
+    }
+    updateDisplay();
+}
+
+function updateDisplay() {
+    const display = document.getElementById('calc-display');
+    if (display) {
+        display.value = displayValue;
+    }
+}
+
+// Gestion du bouton bruteforce
 function setupBruteforce() {
     const bruteforceBtn = document.getElementById('bruteforce-btn');
-    if (!bruteforceBtn) return;
-    
-    bruteforceBtn.addEventListener('click', function() {
-        // Sélectionner automatiquement les bonnes réponses
-        questionnaire.forEach(q => {
-            selectAnswer(q.qid, q.correctAnswer);
+    if (bruteforceBtn) {
+        bruteforceBtn.addEventListener('click', () => {
+            // Simuler les bonnes réponses automatiquement
+            Object.keys(bonnesReponses).forEach(qid => {
+                repondre(parseInt(qid), bonnesReponses[qid]);
+            });
         });
-        
-        unlockAchievement('bruteforce', 'Bruteforce activé!', '../static/icons/iron_ingot.png');
+    }
+}
+
+// Smooth scroll pour les liens du menu
+function setupSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 }
+
+// Animation de fondu pour les éléments
+function setupFadeInElements() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    creerQuestionnaire();
+    creerCalculatrice();
+    setupBruteforce();
+    setupSmoothScroll();
+    setupFadeInElements();
+});
 
 // Système d'Achievements
 const achievements = [

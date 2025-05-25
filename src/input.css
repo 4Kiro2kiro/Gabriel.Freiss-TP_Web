@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@layer base {
+  body {
+    @apply font-minecraft;
+    image-rendering: pixelated;
+  }
+}
+
+@layer components {
+  .minecraft-section {
+    @apply min-h-screen py-8 px-4 relative;
+  }
+  
+  .minecraft-card {
+    @apply card bg-base-100/80 backdrop-blur-md border-4 border-minecraft-obsidian p-4;
+  }
+  
+  .minecraft-btn {
+    @apply btn font-minecraft text-lg normal-case border-2 border-black;
+  }
+  
+  .minecraft-navbar {
+    @apply navbar bg-minecraft-wood border-b-4 border-black px-4 py-2;
+  }
+  
+  .hero-title {
+    @apply text-4xl md:text-6xl font-bold mb-4;
+  }
+  
+  .hero-subtitle {
+    @apply text-xl md:text-2xl mb-6;
+  }
+  
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold mb-6 text-center;
+  }
+  
+  .skill-bar {
+    @apply h-6 bg-base-300 rounded-md overflow-hidden border-2 border-minecraft-obsidian;
+  }
+  
+  .skill-progress {
+    @apply h-full bg-primary;
+  }
+  
+  .crafting-container {
+    @apply grid grid-cols-3 gap-2 p-4 bg-minecraft-wood/80 backdrop-blur-md border-4 border-black rounded-md max-w-md mx-auto;
+  }
+}
+
+/* Animation de fondu */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animation de flottement pour les indicateurs de défilement */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.float-animation {
+  animation: float 2s infinite ease-in-out;
+}
+
+/* Animation pour les accomplissements */
+.achievement {
+  @apply fixed top-10 right-10 flex items-center bg-black/80 p-4 rounded-md border-2 border-primary opacity-0 transition-all duration-1000;
+  transform: translateX(100px);
+}
+
+.achievement.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.achievement-icon {
+  @apply w-10 h-10 mr-3;
+}
+
+.achievement-text {
+  @apply flex flex-col;
+}
+
+.achievement-title {
+  @apply text-primary font-bold;
+}
+
+.achievement-description {
+  @apply text-white text-sm;
+} 

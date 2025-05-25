@@ -1,57 +1,71 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="minecraft">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Steve's CV</title>
-    <link rel="stylesheet" href="css/inputdaisy.css">
-    <link rel="icon" href="static/steve.png" type="image/png">
+    <link rel="stylesheet" href="css/output.css">
+    <link rel="icon" href="static/mc_logo.png" type="image/png">
 </head>
-<body>
+<body class="bg-minecraft-obsidian text-white">
     <!-- Navigation -->
-    <nav class="minecraft-navbar">
-        <div class="brand">Steve's CV</div>
-        <div class="nav-links">
-            <a href="index.html" class="minecraft-btn">Retour au CV</a>
+    <nav class="minecraft-navbar sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="font-bold text-2xl">Steve's CV</div>
+        </div>
+        <div class="navbar-end">
+            <a href="index.html" class="minecraft-btn btn-ghost">Retour au CV</a>
         </div>
     </nav>
 
     <!-- Contact Success Section -->
-    <section class="minecraft-section contact-section">
-        <div class="hero-content fade-in">
-            <h1 class="hero-title">Félicitations !</h1>
-            <h2 class="hero-subtitle">Vous avez prouvé votre connaissance de Minecraft.</h2>
-            <div class="achievement achievement show">
-                <img src="static/icons/diamond_sword.png" alt="Achievement" class="achievement-icon">
-                <div class="achievement-text">
-                    <div class="achievement-title">Accès Débloqué</div>
-                    <div class="achievement-description">Vous pouvez maintenant contacter Steve directement</div>
+    <section class="minecraft-section min-h-screen py-16" style="background-image: url('static/end.jpg'); background-size: cover;">
+        <div class="container mx-auto px-4">
+            <div class="hero-content text-center text-white fade-in">
+                <div class="max-w-md">
+                    <h1 class="hero-title text-primary">Félicitations !</h1>
+                    <h2 class="hero-subtitle text-accent">Vous avez prouvé votre connaissance de Minecraft.</h2>
+                    <div class="achievement achievement show">
+                        <img src="static/icons/diamond_sword.png" alt="Achievement" class="achievement-icon">
+                        <div class="achievement-text">
+                            <div class="achievement-title">Accès Débloqué</div>
+                            <div class="achievement-description">Vous pouvez maintenant contacter Steve directement</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="minecraft-card fade-in" style="max-width: 600px; margin: 2rem auto;">
-            <h3 class="card-title">Livre & Plume</h3>
-            <p>Utilisez ce formulaire pour m'envoyer un message :</p>
             
-            <form id="contactForm" class="contact-form" onsubmit="return handleSubmit(event)">
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="name" style="display: block; margin-bottom: 0.5rem; font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: var(--minecraft-gold);">Nom</label>
-                    <input type="text" id="name" name="name" style="width: 100%; padding: 0.75rem; background-color: rgba(0, 0, 0, 0.7); border: 3px solid #000; color: white; font-family: 'VT323', monospace; font-size: 1.2rem;" placeholder="Votre nom" required>
+            <div class="max-w-xl mx-auto mt-12 fade-in">
+                <div class="minecraft-card">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Livre & Plume</h3>
+                    <p class="mb-6">Utilisez ce formulaire pour m'envoyer un message :</p>
+                    
+                    <form id="contactForm" class="space-y-4" onsubmit="return handleSubmit(event)">
+                        <div class="form-control">
+                            <label for="name" class="label">
+                                <span class="label-text text-accent">Nom</span>
+                            </label>
+                            <input type="text" id="name" name="name" class="input input-bordered w-full bg-base-300" placeholder="Votre nom" required>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="email" class="label">
+                                <span class="label-text text-accent">Email</span>
+                            </label>
+                            <input type="email" id="email" name="email" class="input input-bordered w-full bg-base-300" placeholder="votre@email.com" required>
+                        </div>
+                        
+                        <div class="form-control">
+                            <label for="message" class="label">
+                                <span class="label-text text-accent">Message</span>
+                            </label>
+                            <textarea id="message" name="message" class="textarea textarea-bordered w-full bg-base-300 min-h-32" placeholder="Votre message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success w-full">Envoyer</button>
+                    </form>
                 </div>
-                
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: var(--minecraft-gold);">Email</label>
-                    <input type="email" id="email" name="email" style="width: 100%; padding: 0.75rem; background-color: rgba(0, 0, 0, 0.7); border: 3px solid #000; color: white; font-family: 'VT323', monospace; font-size: 1.2rem;" placeholder="votre@email.com" required>
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 1rem;">
-                    <label for="message" style="display: block; margin-bottom: 0.5rem; font-family: 'Press Start 2P', cursive; font-size: 0.8rem; color: var(--minecraft-gold);">Message</label>
-                    <textarea id="message" name="message" style="width: 100%; padding: 0.75rem; background-color: rgba(0, 0, 0, 0.7); border: 3px solid #000; color: white; font-family: 'VT323', monospace; font-size: 1.2rem; min-height: 150px;" placeholder="Votre message" required></textarea>
-                </div>
-                
-                <button type="submit" style="width: 100%; padding: 1rem; background-color: var(--minecraft-emerald); color: #000; font-family: 'Press Start 2P', cursive; font-size: 1rem; border: 3px solid #000; cursor: pointer;">Envoyer</button>
-            </form>
+            </div>
         </div>
     </section>
 

@@ -1,122 +1,151 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="minecraft">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Steve's CV - Minecraft Edition</title>
-    <link rel="stylesheet" href="css/inputdaisy.css">
+    <link rel="stylesheet" href="css/output.css">
     <link rel="icon" href="static/mc_logo.png" type="image/png">
 </head>
-<body>
+<body class="bg-minecraft-obsidian text-white">
     <!-- Navigation -->
-    <nav class="minecraft-navbar">
-        <div class="brand">Steve's CV</div>
-        <div class="nav-links">
-            <a href="#hero" class="minecraft-btn">Accueil</a>
-            <a href="#about" class="minecraft-btn">À propos</a>
-            <a href="#skills" class="minecraft-btn">Compétences</a>
-            <a href="#crafting" class="minecraft-btn">Crafting</a>
-            <a href="#contact" class="minecraft-btn">Contact</a>
+    <nav class="minecraft-navbar sticky top-0 z-50">
+        <div class="navbar-start">
+            <div class="font-bold text-2xl">Steve's CV</div>
+        </div>
+        <div class="navbar-end">
+            <a href="#hero" class="minecraft-btn btn-ghost">Accueil</a>
+            <a href="#about" class="minecraft-btn btn-ghost">À propos</a>
+            <a href="#skills" class="minecraft-btn btn-ghost">Compétences</a>
+            <a href="#crafting" class="minecraft-btn btn-ghost">Crafting</a>
+            <a href="#contact" class="minecraft-btn btn-ghost">Contact</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="minecraft-section hero-section">
-        <div class="hero-content">
-            <div class="hero-image-container">
-                <img src="static/steve_selfi.png" alt="Steve" class="hero-steve-image" style="image-rendering: pixelated;">
-            </div>
-            <div class="hero-text-container">
-                <h1 class="hero-title">
-                    <span class="minecraft-text">Steve</span>
-                </h1>
-                <h2 class="hero-subtitle">
-                    <span class="minecraft-text">Explorateur professionnel & Constructeur créatif</span>
-                </h2>
-            </div>
-            <div class="hero-cta">
-                <a href="#about" class="minecraft-btn">Explorer mon CV</a>
+    <section id="hero" class="minecraft-section hero min-h-screen" style="background-image: url('static/minecraft_sky.jpg');">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-white">
+            <div class="max-w-md fade-in">
+                <div class="flex justify-center mb-6">
+                    <img src="static/steve_selfi.png" alt="Steve" class="w-32 h-32 rounded-lg" style="image-rendering: pixelated;">
+                </div>
+                <h1 class="hero-title text-primary">Steve</h1>
+                <h2 class="hero-subtitle text-accent">Explorateur professionnel & Constructeur créatif</h2>
+                <div class="mt-6">
+                    <a href="#about" class="minecraft-btn btn-primary">Explorer mon CV</a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="minecraft-section about-section">
-        <h2 class="section-title fade-in">À propos de moi</h2>
-        <div class="about-grid">
-            <div class="minecraft-card fade-in">
-                <h3 class="card-title">Mon histoire</h3>
-                <p>Je suis Steve, explorateur passionné avec plus de 10 ans d'expérience dans la survie et la construction en environnements hostiles. Expert en gestion de ressources et en création de structures innovantes.</p>
-                <p>Né dans un monde cubique, j'ai développé des compétences uniques pour prospérer dans n'importe quel biome. Ma capacité à collecter des ressources et à construire des abris efficaces m'a permis de surmonter d'innombrables défis.</p>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-label">Blocs minés</div>
-                        <div class="stat-value">1M+</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Structures construites</div>
-                        <div class="stat-value">500+</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-label">Monstres vaincus</div>
-                        <div class="stat-value">10K+</div>
+    <section id="about" class="minecraft-section py-16" style="background-image: url('static/cave.png'); background-size: cover;">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-white fade-in">À propos de moi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="minecraft-card fade-in">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Mon histoire</h3>
+                    <p class="mb-4">Je suis Steve, explorateur passionné avec plus de 10 ans d'expérience dans la survie et la construction en environnements hostiles. Expert en gestion de ressources et en création de structures innovantes.</p>
+                    <p class="mb-4">Né dans un monde cubique, j'ai développé des compétences uniques pour prospérer dans n'importe quel biome. Ma capacité à collecter des ressources et à construire des abris efficaces m'a permis de surmonter d'innombrables défis.</p>
+                    <div class="grid grid-cols-3 gap-4 mt-6">
+                        <div class="stats shadow">
+                            <div class="stat bg-base-300">
+                                <div class="stat-title">Blocs minés</div>
+                                <div class="stat-value text-primary">1M+</div>
+                            </div>
+                        </div>
+                        <div class="stats shadow">
+                            <div class="stat bg-base-300">
+                                <div class="stat-title">Structures</div>
+                                <div class="stat-value text-primary">500+</div>
+                            </div>
+                        </div>
+                        <div class="stats shadow">
+                            <div class="stat bg-base-300">
+                                <div class="stat-title">Monstres</div>
+                                <div class="stat-value text-primary">10K+</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="steve-container fade-in">
-                <img src="static/mc_elytra.png" alt="Steve Minecraft" class="steve-image" style="image-rendering: pixelated;">
-                <div class="minecraft-card">
-                    <h3 class="card-title">Informations</h3>
-                    <ul class="info-list">
-                        <li><strong>Nom:</strong> Steve</li>
-                        <li><strong>Occupation:</strong> Mineur / Constructeur</li>
-                        <li><strong>Localisation:</strong> Overworld</li>
-                        <li><strong>Expérience:</strong> 10+ ans</li>
-                    </ul>
+                <div class="flex flex-col items-center justify-center fade-in">
+                    <img src="static/mc_elytra.png" alt="Steve Minecraft" class="w-48 h-48 mb-6" style="image-rendering: pixelated;">
+                    <div class="minecraft-card w-full">
+                        <h3 class="text-2xl font-bold mb-4 text-primary">Informations</h3>
+                        <ul class="space-y-2">
+                            <li><span class="font-bold text-accent">Nom:</span> Steve</li>
+                            <li><span class="font-bold text-accent">Occupation:</span> Mineur / Constructeur</li>
+                            <li><span class="font-bold text-accent">Localisation:</span> Overworld</li>
+                            <li><span class="font-bold text-accent">Expérience:</span> 10+ ans</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="minecraft-section skills-section">
-        <h2 class="section-title fade-in">Mes compétences</h2>
-        <div class="skills-container fade-in">
-            <div class="minecraft-card">
-                <div class="skill-item">
-                    <div class="skill-name">Minage</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 90%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Construction</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 85%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Combat</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 75%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Agriculture</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 80%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Exploration</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 95%"></div>
-                    </div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-name">Artisanat</div>
-                    <div class="skill-bar">
-                        <div class="skill-progress" style="width: 88%"></div>
+    <section id="skills" class="minecraft-section py-16" style="background-image: url('static/landscape.png'); background-size: cover;">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-white fade-in">Mes compétences</h2>
+            <div class="max-w-3xl mx-auto fade-in">
+                <div class="minecraft-card">
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Minage</span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Construction</span>
+                                <span class="text-accent">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Combat</span>
+                                <span class="text-accent">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Agriculture</span>
+                                <span class="text-accent">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Exploration</span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="font-bold text-accent">Artisanat</span>
+                                <span class="text-accent">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 88%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -124,28 +153,34 @@
     </section>
 
     <!-- Crafting Table Section -->
-    <section id="crafting" class="minecraft-section crafting-section">
-        <h2 class="section-title fade-in">Table de Craft</h2>
-        <div class="minecraft-card fade-in">
-            <h3 class="card-title">Calculatrice Minecraft</h3>
-            <p>Utilisez les ressources pour créer des calculs. Cliquez sur les cases pour placer les chiffres et les opérations.</p>
-        </div>
-        <div class="crafting-container fade-in">
-            <!-- La table de craft sera générée via JavaScript -->
+    <section id="crafting" class="minecraft-section py-16" style="background-image: url('static/enter_cave.jpg'); background-size: cover;">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-white fade-in">Table de Craft</h2>
+            <div class="max-w-md mx-auto fade-in">
+                <div class="minecraft-card mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Calculatrice Minecraft</h3>
+                    <p>Utilisez les ressources pour créer des calculs. Cliquez sur les cases pour placer les chiffres et les opérations.</p>
+                </div>
+                <div class="crafting-container">
+                    <!-- La calculatrice sera générée via JavaScript -->
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="minecraft-section contact-section">
-        <h2 class="section-title fade-in">Me contacter</h2>
-        <div class="questionnaire-container fade-in">
-            <div class="minecraft-card">
-                <h3 class="card-title">Questionnaire Minecraft</h3>
-                <p>Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
-                <div id="questionnaire">
-                    <!-- Le questionnaire sera généré via JavaScript -->
+    <section id="contact" class="minecraft-section py-16" style="background-image: url('static/end.jpg'); background-size: cover;">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title text-white fade-in">Me contacter</h2>
+            <div class="max-w-2xl mx-auto fade-in">
+                <div class="minecraft-card">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Questionnaire Minecraft</h3>
+                    <p class="mb-6">Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
+                    <div id="questionnaire" class="mb-6">
+                        <!-- Le questionnaire sera généré via JavaScript -->
+                    </div>
+                    <button id="bruteforce-btn" class="minecraft-btn btn-warning w-full">Bruteforce</button>
                 </div>
-                <button id="bruteforce-btn" class="minecraft-btn bruteforce-btn">Bruteforce</button>
             </div>
         </div>
     </section>
