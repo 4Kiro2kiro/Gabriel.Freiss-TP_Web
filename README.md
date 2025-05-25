@@ -5,7 +5,6 @@ Un CV créatif et interactif sur le thème de Minecraft, développé avec Tailwi
 ## Fonctionnalités
 
 - Design immersif inspiré de l'univers Minecraft avec textures et icônes fidèles au jeu
-- Navigation fluide "page par page" avec transition automatique au moindre scroll
 - Indicateurs de section dynamiques qui montrent votre position dans le CV
 - Calculatrice Minecraft interactive avec style authentique
 - Système d'achievements qui se débloquent à mesure que vous explorez le CV
@@ -62,11 +61,6 @@ Un CV créatif et interactif sur le thème de Minecraft, développé avec Tailwi
 
 ## Caractéristiques spéciales
 
-### Système de navigation innovant
-- Scrolling fluide qui se déclenche au moindre mouvement de la molette
-- Transition automatique vers la section suivante/précédente
-- Fonctionne sur appareils tactiles avec détection des swipes
-- Indicateurs visuels qui montrent votre position actuelle
 
 ### Calculatrice Minecraft
 - Interface inspirée de la table de craft Minecraft
@@ -88,7 +82,6 @@ Un CV créatif et interactif sur le thème de Minecraft, développé avec Tailwi
 - [x] Créer une page de contact conditionnelle basée sur les réponses
 - [x] Utiliser la fonction mailto pour le formulaire de contact
 - [x] Inclure un bouton "bruteforce" pour obtenir les bonnes réponses
-- [x] Ajouter une navigation fluide entre les sections
 - [x] Créer un design responsive et accessible
 
 ## Auteur
