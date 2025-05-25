@@ -525,6 +525,7 @@ const bonnesReponses = {
 let isScrolling = false; // Ajouter un verrou pour éviter les défilements multiples
 let lastScrollTime = 0; // Pour limiter la fréquence de défilement
 const scrollLockTime = 3500; // Temps de verrouillage en millisecondes (3.5 secondes)
+let achievementsUnlocked = {}; // Pour suivre les achievements déjà déverrouillés
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', function() {
@@ -544,6 +545,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Activer la navigation fluide
     setupSmoothScrolling();
+
+    // Ajouter une classe pour indiquer que le DOM est chargé
+    document.body.classList.add('dom-loaded');
+
+    // Protéger contre le bug de softlock
+    window.addEventListener('keydown', function(e) {
+        // Échap réinitialise tout en cas de problème
+        if (e.key === 'Escape') {
+            isScrolling = false;
+            console.log("Navigation réinitialisée");
+        }
+    });
+
+    // Afficher un indicateur visuel de verrouillage
+    createLockIndicator();
 });
 
 // Crée un indicateur visuel de verrouillage de navigation
@@ -605,6 +621,9 @@ function setupSmoothScrolling() {
                 // Mettre à jour l'indicateur actif
                 updateActiveIndicator(targetId.substring(1));
                 
+                // Déverrouiller l'achievement pour cette section
+                unlockAchievementForSection(targetId.substring(1));
+                
                 // Libérer le verrou après l'animation
                 setTimeout(() => {
                     isScrolling = false;
@@ -637,6 +656,7 @@ function setupSmoothScrolling() {
         
         if (currentSectionId) {
             updateActiveIndicator(currentSectionId);
+            unlockAchievementForSection(currentSectionId);
         }
     }, { passive: true }); // Améliore les performances
 
@@ -665,7 +685,10 @@ function setupSmoothScrolling() {
 function setupSectionIndicators() {
     const indicators = document.querySelectorAll('.section-indicator');
     
-    indicators.forEach(indicator => {
+    indicators.forEach((indicator, index) => {
+        // Ajouter l'attribut data-index pour faciliter la navigation
+        indicator.setAttribute('data-index', index);
+        
         indicator.addEventListener('click', function() {
             // Éviter les clics répétés
             if (isScrolling) return;
@@ -683,6 +706,9 @@ function setupSectionIndicators() {
                 });
                 
                 updateActiveIndicator(sectionId);
+                
+                // Déverrouiller l'achievement pour cette section
+                unlockAchievementForSection(sectionId);
                 
                 // Libérer le verrou après l'animation
                 setTimeout(() => {
@@ -749,7 +775,7 @@ function creerQuestionnaire() {
     
     questionnaire.forEach(question => {
         const questionDiv = document.createElement('div');
-        questionDiv.className = 'mb-4';
+        questionDiv.className = 'mb-4 text-center';
         questionDiv.innerHTML = `
             <h3 class="text-xl mb-2">${question.label}</h3>
             <div class="flex flex-col gap-2">
@@ -789,7 +815,10 @@ window.repondre = function(qid, rid) {
         );
 
         if (toutesLesReponsesSontCorrectes) {
-            window.location.href = 'pagecontact.html';
+            showAchievement("Félicitations !", "Vous avez répondu correctement à toutes les questions !");
+            setTimeout(() => {
+                window.location.href = 'pagecontact.html';
+            }, 2000);
         }
     }
 }
@@ -803,7 +832,97 @@ function setupBruteforce() {
             Object.keys(bonnesReponses).forEach(qid => {
                 repondre(parseInt(qid), bonnesReponses[qid]);
             });
+            
+            showAchievement("Hacker Minecraft", "Vous avez utilisé le bruteforce pour passer le questionnaire !");
         });
+    }
+}
+
+// Système d'achievements amélioré
+function unlockAchievementForSection(sectionId) {
+    // Vérifier si l'achievement a déjà été déverrouillé
+    if (achievementsUnlocked[sectionId]) {
+        return;
+    }
+    
+    achievementsUnlocked[sectionId] = true;
+    
+    // Configuration des achievements pour chaque section
+    const achievements = {
+        'hero': {
+            title: 'Premier pas',
+            description: 'Vous avez découvert la page d\'accueil'
+        },
+        'about': {
+            title: 'Qui est Steve ?',
+            description: 'Vous en savez maintenant plus sur Steve'
+        },
+        'skills': {
+            title: 'Compétences débloquées',
+            description: 'Vous avez découvert les compétences de Steve'
+        },
+        'crafting': {
+            title: 'Crafteur expert',
+            description: 'Vous pouvez maintenant utiliser la table de craft'
+        },
+        'contact': {
+            title: 'Prêt à contacter',
+            description: 'Vous êtes arrivé à la dernière étape'
+        }
+    };
+    
+    // Afficher l'achievement
+    if (achievements[sectionId]) {
+        showAchievement(achievements[sectionId].title, achievements[sectionId].description);
+    }
+}
+
+// Afficher une notification d'achievement
+function showAchievement(title, description) {
+    const container = document.getElementById('achievement-container');
+    if (!container) return;
+    
+    // Créer l'élément de notification
+    const notification = document.createElement('div');
+    notification.className = 'achievement-notification';
+    notification.innerHTML = `
+        <div class="icon"></div>
+        <div class="content">
+            <div class="title">Achievement débloqué : ${title}</div>
+            <div class="description">${description}</div>
+        </div>
+    `;
+    
+    // Ajouter la notification au conteneur
+    container.appendChild(notification);
+    
+    // Afficher la notification avec un petit délai
+    setTimeout(() => {
+        notification.classList.add('show');
+        
+        // Jouer un son de notification (si possible)
+        playAchievementSound();
+    }, 100);
+    
+    // Masquer et supprimer la notification après 4 secondes
+    setTimeout(() => {
+        notification.classList.remove('show');
+        
+        // Supprimer complètement après la fin de l'animation
+        setTimeout(() => {
+            notification.remove();
+        }, 500);
+    }, 4000);
+}
+
+// Jouer un son d'achievement
+function playAchievementSound() {
+    try {
+        const sound = new Audio('static/sounds/minecraft-levelup.mp3');
+        sound.volume = 0.2;
+        sound.play().catch(err => console.log('Impossible de jouer le son:', err));
+    } catch (e) {
+        console.log('Erreur audio:', e);
     }
 }
 
@@ -897,6 +1016,11 @@ window.calculateResult = function() {
         const result = eval(craftingExpression);
         craftingExpression = craftingExpression + '=' + result.toString();
         updateCalculatorDisplay();
+        
+        // Déverrouiller un achievement spécial si le résultat est 42
+        if (result === 42) {
+            showAchievement("Réponse Universelle", "Vous avez trouvé la réponse à la grande question sur la vie, l'univers et le reste !");
+        }
     } catch (e) {
         craftingExpression = 'Erreur';
         updateCalculatorDisplay();

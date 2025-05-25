@@ -3,13 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Steve's CV</title>
+    <title>Contact - Steve's CV - Minecraft Edition</title>
     <link rel="stylesheet" href="css/output.css">
     <link rel="icon" href="static/mc_logo.png" type="image/png">
+    <style>
+        /* Styles généraux */
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            background-image: url('static/minecraft_sky.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .section-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: calc(50px + 2rem);
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .minecraft-card {
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-20px) rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body class="bg-minecraft-obsidian text-white">
     <!-- Navigation -->
-    <nav class="minecraft-navbar sticky top-0 z-50">
+    <nav class="minecraft-navbar fixed top-0 z-50 w-full">
         <div class="navbar-start">
             <div class="font-bold text-2xl">Steve's CV</div>
         </div>
@@ -18,87 +63,62 @@
         </div>
     </nav>
 
-    <!-- Contact Success Section -->
-    <section class="minecraft-section flex items-center" style="background-image: url('static/end.jpg'); background-size: cover; height: calc(100vh - 64px);">
-        <div class="container mx-auto px-4 py-8">
-            <div class="text-center text-white fade-in mb-8">
-                <div class="max-w-md mx-auto">
-                    <h1 class="hero-title text-primary">Félicitations !</h1>
-                    <h2 class="hero-subtitle text-accent">Vous avez prouvé votre connaissance de Minecraft.</h2>
-                    <div class="achievement achievement show">
-                        <img src="static/icons/diamond_sword.png" alt="Achievement" class="achievement-icon">
-                        <div class="achievement-text">
-                            <div class="achievement-title">Accès Débloqué</div>
-                            <div class="achievement-description">Vous pouvez maintenant contacter Steve directement</div>
-                        </div>
+    <div class="section-container">
+        <div class="hero-content text-center text-white">
+            <div class="max-w-md mx-auto">
+                <h1 class="text-5xl font-bold text-primary mb-6">Félicitations !</h1>
+                <div class="minecraft-card p-6">
+                    <div class="mb-8">
+                        <img src="static/steve_diamond.png" alt="Steve avec un diamant" class="w-64 h-64 mx-auto rounded-lg" style="image-rendering: pixelated;">
+                    </div>
+                    <h2 class="text-2xl font-semibold text-accent mb-4">Vous avez réussi le questionnaire Minecraft !</h2>
+                    <p class="mb-6">Vous pouvez maintenant me contacter directement par email à l'adresse suivante :</p>
+                    <div class="minecraft-btn btn-primary mb-6 flex items-center justify-center gap-2 mx-auto">
+                        <img src="static/icons/diamond.png" alt="Diamant" class="w-6 h-6">
+                        <span>steve@minecraft-cv.net</span>
+                    </div>
+                    <p class="mb-4">Ou par téléphone au :</p>
+                    <div class="minecraft-btn btn-accent flex items-center justify-center gap-2 mx-auto">
+                        <img src="static/icons/diamond_pickaxe.png" alt="Pioche" class="w-6 h-6">
+                        <span>+33 6 12 34 56 78</span>
                     </div>
                 </div>
-            </div>
-            
-            <div class="max-w-xl mx-auto fade-in">
-                <div class="minecraft-card">
-                    <h3 class="text-2xl font-bold mb-4 text-primary">Livre & Plume</h3>
-                    <p class="mb-4">Utilisez ce formulaire pour m'envoyer un message :</p>
-                    
-                    <form id="contactForm" class="space-y-3" onsubmit="return handleSubmit(event)">
-                        <div class="form-control">
-                            <label for="name" class="label">
-                                <span class="label-text text-accent">Nom</span>
-                            </label>
-                            <input type="text" id="name" name="name" class="input input-bordered w-full bg-base-300" placeholder="Votre nom" required>
-                        </div>
-                        
-                        <div class="form-control">
-                            <label for="email" class="label">
-                                <span class="label-text text-accent">Email</span>
-                            </label>
-                            <input type="email" id="email" name="email" class="input input-bordered w-full bg-base-300" placeholder="votre@email.com" required>
-                        </div>
-                        
-                        <div class="form-control">
-                            <label for="message" class="label">
-                                <span class="label-text text-accent">Message</span>
-                            </label>
-                            <textarea id="message" name="message" class="textarea textarea-bordered w-full bg-base-300 min-h-[100px]" placeholder="Votre message" required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-success w-full">Envoyer</button>
-                    </form>
-                </div>
+                <a href="index.html" class="minecraft-btn btn-ghost mt-6">Retourner au CV</a>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Animation au chargement
+        // Afficher un message de félicitations avec un effet de particules
         document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(element => {
-                element.classList.add('visible');
-            });
+            createParticles();
         });
-        
-        // Gestion du formulaire
-        function handleSubmit(event) {
-            event.preventDefault();
+
+        function createParticles() {
+            const container = document.querySelector('.section-container');
             
-            const nameInput = document.getElementById('name');
-            const emailInput = document.getElementById('email');
-            const messageInput = document.getElementById('message');
-            
-            const name = nameInput.value;
-            const email = emailInput.value;
-            const message = messageInput.value;
-            
-            // Construire l'URL mailto
-            const subject = 'Contact depuis le CV de Steve';
-            const body = `Nom: ${name}\nEmail: ${email}\nMessage: ${message}`;
-            const mailtoUrl = `mailto:steve@minecraft.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Ouvrir le client mail de l'utilisateur
-            window.location.href = mailtoUrl;
-            
-            return false;
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${Math.random() * 10 + 5}px;
+                    height: ${Math.random() * 10 + 5}px;
+                    background-color: gold;
+                    border-radius: 2px;
+                    top: ${Math.random() * 100}%;
+                    left: ${Math.random() * 100}%;
+                    pointer-events: none;
+                    opacity: 0;
+                    animation: floatParticle ${Math.random() * 3 + 2}s ease-in-out infinite alternate;
+                `;
+                
+                container.appendChild(particle);
+                
+                // Animation d'entrée
+                setTimeout(() => {
+                    particle.style.opacity = '0.7';
+                }, Math.random() * 1000);
+            }
         }
     </script>
 </body>

@@ -22,7 +22,7 @@ Un CV créatif sur le thème de Minecraft, développé avec Tailwind CSS et Dais
 
 1. Clonez ce dépôt
    ```
-   git clone <url-du-repo>
+   git clone https://github.com/4Kiro2kiro/Gabriel.Freiss-TP_Web
    cd TP-Web
    ```
 
@@ -62,4 +62,4 @@ Un CV créatif sur le thème de Minecraft, développé avec Tailwind CSS et Dais
 
 ## Auteur
 
-[Votre nom]
+Gabriel Freiss
