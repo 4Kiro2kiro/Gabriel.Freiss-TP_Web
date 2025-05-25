@@ -34,19 +34,9 @@ Un CV créatif et interactif sur le thème de Minecraft, développé avec Tailwi
    npm install
    ```
 
-3. Lancez le serveur de développement
+3. Lancez le serveur
    ```
-   npm run dev
-   ```
-
-   Ou compilez le CSS pour la production:
-   ```
-   npm run build
-   ```
-
-4. Alternative: lancez simplement avec un serveur HTTP statique
-   ```
-   python -m http.server 8000
+   npm start
    ```
 
 ## Structure du projet
