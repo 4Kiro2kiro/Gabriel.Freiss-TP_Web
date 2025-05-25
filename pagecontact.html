@@ -19,10 +19,10 @@
     </nav>
 
     <!-- Contact Success Section -->
-    <section class="minecraft-section min-h-screen py-16" style="background-image: url('static/end.jpg'); background-size: cover;">
-        <div class="container mx-auto px-4">
-            <div class="hero-content text-center text-white fade-in">
-                <div class="max-w-md">
+    <section class="minecraft-section flex items-center" style="background-image: url('static/end.jpg'); background-size: cover; height: calc(100vh - 64px);">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center text-white fade-in mb-8">
+                <div class="max-w-md mx-auto">
                     <h1 class="hero-title text-primary">Félicitations !</h1>
                     <h2 class="hero-subtitle text-accent">Vous avez prouvé votre connaissance de Minecraft.</h2>
                     <div class="achievement achievement show">
@@ -35,12 +35,12 @@
                 </div>
             </div>
             
-            <div class="max-w-xl mx-auto mt-12 fade-in">
+            <div class="max-w-xl mx-auto fade-in">
                 <div class="minecraft-card">
                     <h3 class="text-2xl font-bold mb-4 text-primary">Livre & Plume</h3>
-                    <p class="mb-6">Utilisez ce formulaire pour m'envoyer un message :</p>
+                    <p class="mb-4">Utilisez ce formulaire pour m'envoyer un message :</p>
                     
-                    <form id="contactForm" class="space-y-4" onsubmit="return handleSubmit(event)">
+                    <form id="contactForm" class="space-y-3" onsubmit="return handleSubmit(event)">
                         <div class="form-control">
                             <label for="name" class="label">
                                 <span class="label-text text-accent">Nom</span>
@@ -59,7 +59,7 @@
                             <label for="message" class="label">
                                 <span class="label-text text-accent">Message</span>
                             </label>
-                            <textarea id="message" name="message" class="textarea textarea-bordered w-full bg-base-300 min-h-32" placeholder="Votre message" required></textarea>
+                            <textarea id="message" name="message" class="textarea textarea-bordered w-full bg-base-300 min-h-[100px]" placeholder="Votre message" required></textarea>
                         </div>
                         
                         <button type="submit" class="btn btn-success w-full">Envoyer</button>

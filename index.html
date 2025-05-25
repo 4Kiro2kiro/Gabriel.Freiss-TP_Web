@@ -6,10 +6,135 @@
     <title>Steve's CV - Minecraft Edition</title>
     <link rel="stylesheet" href="css/output.css">
     <link rel="icon" href="static/mc_logo.png" type="image/png">
+    <style>
+        /* Styles généraux */
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .minecraft-section {
+            min-height: 100vh;
+            padding-top: 80px;
+            padding-bottom: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* Styles pour les indicateurs de section */
+        .section-indicators {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 50;
+        }
+        
+        .section-indicator {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--minecraft-wood);
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .section-indicator.active {
+            border-color: var(--minecraft-diamond);
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: scale(1.2);
+        }
+        
+        .section-indicator:hover {
+            transform: scale(1.2);
+        }
+        
+        /* Styles des icônes pour les indicateurs */
+        .indicator-icon {
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        
+        .icon-home {
+            background-image: url('static/icons/diamond.png');
+        }
+        
+        .icon-steve {
+            background-image: url('static/icons/iron_ingot.png');
+        }
+        
+        .icon-sword {
+            background-image: url('static/icons/diamond_sword.png');
+        }
+        
+        .icon-craft {
+            background-image: url('static/icons/diamond_pickaxe.png');
+        }
+        
+        .icon-book {
+            background-image: url('static/icons/iron_ingot.png');
+        }
+        
+        /* Classes de positionnement ajustables */
+        .steve-container {
+            position: relative;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 0;
+            /* Ajustez ces valeurs pour centrer Steve */
+            margin-top: 0;
+            max-width: 500px;
+        }
+        
+        .section-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            /* Ajustez ces valeurs pour le positionnement vertical */
+            padding-top: calc(50px + 2rem);
+            min-height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Titres plus grands pour les sections intermédiaires */
+        #about h2, #skills h2, #crafting h2 {
+            font-size: 3.5rem; /* Augmentation de la taille des titres */
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Réduction de 20% des blocs de la dernière page */
+        #contact .minecraft-card {
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
 </head>
 <body class="bg-minecraft-obsidian text-white">
     <!-- Navigation -->
-    <nav class="minecraft-navbar sticky top-0 z-50">
+    <nav class="minecraft-navbar fixed top-0 z-50 w-full">
         <div class="navbar-start">
             <div class="font-bold text-2xl">Steve's CV</div>
         </div>
@@ -23,28 +148,27 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="minecraft-section hero min-h-screen" style="background-image: url('static/minecraft_sky.jpg');">
-        <div class="hero-overlay bg-opacity-60"></div>
-        <div class="hero-content text-center text-white">
-            <div class="max-w-md fade-in">
-                <div class="flex justify-center mb-6">
-                    <img src="static/steve_selfi.png" alt="Steve" class="w-32 h-32 rounded-lg" style="image-rendering: pixelated;">
-                </div>
-                <h1 class="hero-title text-primary">Steve</h1>
-                <h2 class="hero-subtitle text-accent">Explorateur professionnel & Constructeur créatif</h2>
-                <div class="mt-6">
-                    <a href="#about" class="minecraft-btn btn-primary">Explorer mon CV</a>
+    <section id="hero" class="minecraft-section flex flex-col items-center justify-center" style="background-image: url('static/minecraft_sky.jpg');">
+        <div class="section-container">
+            <div class="hero-content text-center text-white">
+                <div class="max-w-md mx-auto">
+                    <div class="steve-container mb-8">
+                        <img src="static/steve_selfi.png" alt="Steve" class="w-56 h-56 rounded-lg" style="image-rendering: pixelated;">
+                    </div>
+                    <h1 class="text-5xl font-bold text-primary mb-4">Steve</h1>
+                    <h2 class="text-2xl font-semibold text-accent mb-6">Explorateur professionnel & Constructeur créatif</h2>
+                    <a href="#about" class="minecraft-btn btn-primary btn-lg">Explorer mon CV</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="minecraft-section py-16" style="background-image: url('static/cave.png'); background-size: cover;">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-white fade-in">À propos de moi</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="minecraft-card fade-in">
+    <section id="about" class="minecraft-section" style="background-image: url('static/cave.png');">
+        <div class="section-container">
+            <h2 class="text-4xl font-bold text-center text-white mb-10">À propos de moi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="minecraft-card">
                     <h3 class="text-2xl font-bold mb-4 text-primary">Mon histoire</h3>
                     <p class="mb-4">Je suis Steve, explorateur passionné avec plus de 10 ans d'expérience dans la survie et la construction en environnements hostiles. Expert en gestion de ressources et en création de structures innovantes.</p>
                     <p class="mb-4">Né dans un monde cubique, j'ai développé des compétences uniques pour prospérer dans n'importe quel biome. Ma capacité à collecter des ressources et à construire des abris efficaces m'a permis de surmonter d'innombrables défis.</p>
@@ -69,7 +193,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex flex-col items-center justify-center fade-in">
+                <div class="flex flex-col items-center justify-center">
                     <img src="static/mc_elytra.png" alt="Steve Minecraft" class="w-48 h-48 mb-6" style="image-rendering: pixelated;">
                     <div class="minecraft-card w-full">
                         <h3 class="text-2xl font-bold mb-4 text-primary">Informations</h3>
@@ -86,64 +210,64 @@
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="minecraft-section py-16" style="background-image: url('static/landscape.png'); background-size: cover;">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-white fade-in">Mes compétences</h2>
-            <div class="max-w-3xl mx-auto fade-in">
+    <section id="skills" class="minecraft-section" style="background-image: url('static/landscape.png');">
+        <div class="section-container">
+            <h2 class="text-4xl font-bold text-center text-white mb-10">Mes compétences</h2>
+            <div class="max-w-3xl mx-auto">
                 <div class="minecraft-card">
-                    <div class="space-y-4">
+                    <div class="space-y-6">
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Minage</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Minage</span>
                                 <span class="text-accent">90%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 90%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Construction</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Construction</span>
                                 <span class="text-accent">85%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 85%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Combat</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Combat</span>
                                 <span class="text-accent">75%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 75%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Agriculture</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Agriculture</span>
                                 <span class="text-accent">80%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 80%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Exploration</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Exploration</span>
                                 <span class="text-accent">95%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 95%"></div>
                             </div>
                         </div>
                         <div>
-                            <div class="flex justify-between mb-1">
-                                <span class="font-bold text-accent">Artisanat</span>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-bold text-accent text-lg">Artisanat</span>
                                 <span class="text-accent">88%</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
+                            <div class="bg-base-300 h-4 rounded-full">
+                                <div class="bg-primary h-4 rounded-full" style="width: 88%"></div>
                             </div>
                         </div>
                     </div>
@@ -153,15 +277,15 @@
     </section>
 
     <!-- Crafting Table Section -->
-    <section id="crafting" class="minecraft-section py-16" style="background-image: url('static/enter_cave.jpg'); background-size: cover;">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-white fade-in">Table de Craft</h2>
-            <div class="max-w-md mx-auto fade-in">
+    <section id="crafting" class="minecraft-section" style="background-image: url('static/enter_cave.jpg');">
+        <div class="section-container">
+            <h2 class="text-4xl font-bold text-center text-white mb-10">Table de Craft</h2>
+            <div class="max-w-md mx-auto">
                 <div class="minecraft-card mb-8">
                     <h3 class="text-2xl font-bold mb-4 text-primary">Calculatrice Minecraft</h3>
                     <p>Utilisez les ressources pour créer des calculs. Cliquez sur les cases pour placer les chiffres et les opérations.</p>
                 </div>
-                <div class="crafting-container">
+                <div class="crafting-container bg-base-200 p-4 rounded-lg">
                     <!-- La calculatrice sera générée via JavaScript -->
                 </div>
             </div>
@@ -169,10 +293,10 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="minecraft-section py-16" style="background-image: url('static/end.jpg'); background-size: cover;">
-        <div class="container mx-auto px-4">
-            <h2 class="section-title text-white fade-in">Me contacter</h2>
-            <div class="max-w-2xl mx-auto fade-in">
+    <section id="contact" class="minecraft-section" style="background-image: url('static/end.jpg');">
+        <div class="section-container">
+            <h2 class="text-4xl font-bold text-center text-white mb-10">Me contacter</h2>
+            <div class="max-w-2xl mx-auto">
                 <div class="minecraft-card">
                     <h3 class="text-2xl font-bold mb-4 text-primary">Questionnaire Minecraft</h3>
                     <p class="mb-6">Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
@@ -184,6 +308,25 @@
             </div>
         </div>
     </section>
+
+    <!-- Indicateurs de section (à droite) -->
+    <div class="section-indicators">
+        <div class="section-indicator" data-section="hero">
+            <div class="indicator-icon icon-home"></div>
+        </div>
+        <div class="section-indicator" data-section="about">
+            <div class="indicator-icon icon-steve"></div>
+        </div>
+        <div class="section-indicator" data-section="skills">
+            <div class="indicator-icon icon-sword"></div>
+        </div>
+        <div class="section-indicator" data-section="crafting">
+            <div class="indicator-icon icon-craft"></div>
+        </div>
+        <div class="section-indicator" data-section="contact">
+            <div class="indicator-icon icon-book"></div>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>
