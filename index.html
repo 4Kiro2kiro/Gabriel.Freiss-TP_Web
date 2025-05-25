@@ -7,18 +7,70 @@
     <link rel="stylesheet" href="css/output.css">
     <link rel="icon" href="static/mc_logo.png" type="image/png">
     <style>
-        /* Styles généraux */
+        /* Styles pour le corps de la page */
         body {
             overflow-x: hidden;
-            overflow-y: auto;
+            overflow-y: auto !important; /* Forcer le défilement standard */
+            height: auto;
+            width: 100%;
+            position: relative !important; /* Forcer la position relative */
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            scroll-behavior: smooth; /* Défilement fluide */
+            /* Suppression du scroll-snap-type pour permettre un défilement normal */
         }
         
         .minecraft-section {
             min-height: 100vh;
+            width: 100%;
             padding-top: 80px;
             padding-bottom: 20px;
-            background-size: cover;
-            background-position: center;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            position: relative !important; /* Forcer la position relative */
+            opacity: 1 !important;
+            visibility: visible !important;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Suppression du scroll-snap-align pour permettre un défilement normal */
+            /* Suppression du scroll-margin-top pour permettre un défilement normal */
+        }
+        
+        /* S'assurer que le contenu de la section active est visible */
+        .minecraft-section.active * {
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+        
+        /* Assurer que chaque section a son propre arrière-plan */
+        #hero {
+            background-image: url('static/minecraft_sky.jpg') !important;
+        }
+        
+        #about {
+            background-image: url('static/cave.png') !important;
+        }
+        
+        #skills {
+            background-image: url('static/landscape.png') !important;
+        }
+        
+        #crafting {
+            background-image: url('static/enter_cave.jpg') !important;
+        }
+        
+        #contact {
+            background-image: url('static/end.jpg') !important;
+        }
+        
+        /* Forcer l'affichage des éléments dans les sections */
+        .minecraft-section * {
+            visibility: visible !important;
+            opacity: 1 !important;
         }
         
         .fade-in {
@@ -75,7 +127,7 @@
         }
         
         .icon-steve {
-            background-image: url('static/icons/iron_ingot.png');
+            background-image: url('static/icons/diamond_pickaxe.png');
         }
         
         .icon-sword {
@@ -87,7 +139,7 @@
         }
         
         .icon-book {
-            background-image: url('static/icons/iron_ingot.png');
+            background-image: url('static/icons/diamond.png');
         }
         
         /* Classes de positionnement ajustables */
@@ -130,6 +182,7 @@
             margin-left: auto;
             margin-right: auto;
             padding: 1.5rem; /* Moins de padding pour réduire la hauteur */
+            margin-top: -10rem; /* Valeur négative pour remonter davantage */
         }
         
         /* Centrage du texte dans le questionnaire */
@@ -191,6 +244,59 @@
             font-size: 12px;
             opacity: 0.9;
         }
+        
+        /* Amélioration de la section compétences */
+        .skill-item {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--minecraft-wood);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--minecraft-diamond);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .skill-name {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--minecraft-diamond);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .skill-icon {
+            width: 24px;
+            height: 24px;
+            image-rendering: pixelated;
+        }
+        
+        .skill-bar-container {
+            position: relative;
+            height: 12px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .skill-bar {
+            height: 100%;
+            background: linear-gradient(to right, #00aaff, #4facfe);
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
     </style>
 </head>
 <body class="bg-minecraft-obsidian text-white">
@@ -209,7 +315,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="minecraft-section flex flex-col items-center justify-center" style="background-image: url('static/minecraft_sky.jpg');">
+    <section id="hero" class="minecraft-section" style="background-image: url('static/minecraft_sky.jpg');">
         <div class="section-container">
             <div class="hero-content text-center text-white">
                 <div class="max-w-md mx-auto">
@@ -275,61 +381,96 @@
         <div class="section-container">
             <h2 class="text-4xl font-bold text-center text-white mb-10">Mes compétences</h2>
             <div class="max-w-3xl mx-auto">
-                <div class="minecraft-card">
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Minage</span>
+                <div class="minecraft-card p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Compétence: Minage -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/diamond_pickaxe.png" alt="Pioche" class="skill-icon">
+                                    Minage
+                                </div>
                                 <span class="text-accent">90%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 90%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 90%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Expert en extraction de diamants et ressources rares</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Construction</span>
+                        
+                        <!-- Compétence: Construction -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/diamond.png" alt="Bloc" class="skill-icon">
+                                    Construction
+                                </div>
                                 <span class="text-accent">85%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 85%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 85%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Création de structures complexes et esthétiques</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Combat</span>
+                        
+                        <!-- Compétence: Combat -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/diamond_sword.png" alt="Épée" class="skill-icon">
+                                    Combat
+                                </div>
                                 <span class="text-accent">75%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 75%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 75%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Défense efficace contre les monstres et adversaires</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Agriculture</span>
+                        
+                        <!-- Compétence: Agriculture -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/iron_ingot.png" alt="Houe" class="skill-icon">
+                                    Agriculture
+                                </div>
                                 <span class="text-accent">80%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 80%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 80%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Cultures efficaces et gestion des ressources alimentaires</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Exploration</span>
+                        
+                        <!-- Compétence: Exploration -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/diamond.png" alt="Boussole" class="skill-icon">
+                                    Exploration
+                                </div>
                                 <span class="text-accent">95%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 95%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 95%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Découverte de nouveaux biomes et structures naturelles</p>
                         </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-bold text-accent text-lg">Artisanat</span>
+                        
+                        <!-- Compétence: Artisanat -->
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <div class="skill-name">
+                                    <img src="static/icons/diamond_pickaxe.png" alt="Artisanat" class="skill-icon">
+                                    Artisanat
+                                </div>
                                 <span class="text-accent">88%</span>
                             </div>
-                            <div class="bg-base-300 h-4 rounded-full">
-                                <div class="bg-primary h-4 rounded-full" style="width: 88%"></div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" style="width: 88%"></div>
                             </div>
+                            <p class="mt-2 text-sm opacity-80">Création d'objets et équipements de haute qualité</p>
                         </div>
                     </div>
                 </div>
@@ -356,12 +497,12 @@
     <!-- Contact Section -->
     <section id="contact" class="minecraft-section" style="background-image: url('static/end.jpg');">
         <div class="section-container">
-            <h2 class="text-4xl font-bold text-center text-white mb-10">Me contacter</h2>
-            <div class="max-w-2xl mx-auto">
-                <div class="minecraft-card">
+            <h2 class="text-4xl font-bold text-center text-white mb-6">Me contacter</h2>
+            <div class="max-w-2xl mx-auto pt-0">
+                <div class="minecraft-card mt-0">
                     <h3 class="text-2xl font-bold mb-4 text-primary">Questionnaire Minecraft</h3>
-                    <p class="mb-6">Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
-                    <div id="questionnaire" class="mb-6">
+                    <p class="mb-4">Pour me contacter, prouvez votre connaissance de Minecraft en répondant correctement aux questions suivantes :</p>
+                    <div id="questionnaire" class="mb-4">
                         <!-- Le questionnaire sera généré via JavaScript -->
                     </div>
                     <button id="bruteforce-btn" class="minecraft-btn btn-warning w-full">Bruteforce</button>
